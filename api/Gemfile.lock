@@ -117,6 +117,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  json
   pg
   pry-rails
   rack-cors
