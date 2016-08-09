@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+10.times do
+  Teacher.create(name: FFaker::Name.name)
+end
+
+100.times do
+  Badge.create(content: FFaker::Pokemon.name, teacher_id: rand(1..10))
+end
