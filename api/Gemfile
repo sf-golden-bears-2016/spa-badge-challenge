@@ -4,7 +4,9 @@ gem 'rails-api'
 gem 'pg'
 gem 'rack-cors'
 gem 'json'
+
 group :development, :test do
   gem 'pry-rails'
   gem 'byebug'
+  gem 'ffaker'
 end
