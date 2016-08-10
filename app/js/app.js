@@ -1,38 +1,49 @@
 $(document).ready(function() {
-  bringHomePage();
+    bringHomePage();
+    showTeacherPage();
 });
 //
 baseURL = "http://localhost:3000"
 
-function bringHomePage(){
-  $.ajax({
-    url: baseURL + "/teachers",
-    method: 'GET',
-    dataType: "json"
-  })
-  // .done(function(response){
-  //   console.log("***********");
-  //   console.log(response)
-  //   $.each(response, function(index, teacher){
-  //     console.log("teacher in each meth")
-  //     console.log(teacher);
-  //     $("#teachers-list").append(
-  //       "<li><a href='#'>" + teacher.name + "</a></li>"
-  //     )
-  //   })
-  // })
+function bringHomePage() {
+    $.ajax({
+            url: baseURL + "/teachers",
+            method: 'GET',
+            dataType: "json"
+        })
+        .done(function(response) {
+            var theTemplateScript = $('#teacher-template').html();
+            var theTemplate = Handlebars.compile(theTemplateScript);
+            var context = {
+                teachers: response
+            };
+            var theCompiledHtml = theTemplate(context)
+            $('#teachers-list').html(theCompiledHtml);
+        })
+}
 
-  .done(function(response){
-    console.log(response);
-    // var teachers = JSON.stringify(response);
-    var theTemplateScript = $('#teacher-template').html();
-    var theTemplate = Handlebars.compile(theTemplateScript);
-    var context = {peeps: response
-  };
-    var theCompiledHtml = theTemplate(context)
-    console.log(context);
-    // $(document.body).append(theCompiledHtml);
-    console.log(theCompiledHtml);
-    $('#teachers-list').html(theCompiledHtml);
+function showTeacherPage(){
+  console.log("ding")
+  $('#teachers-list').on("click", "a", function(event){
+    event.preventDefault();
+    data = $(this).children().first().attr("action")
+    $.ajax({
+      url: data,
+      method: "GET",
+      dataType: "json"
+    })
+    .done(function(response) {
+      $('#teachers-container').hide();
+      $('#teacher-show').show();
+        var theTemplateScript = $('#badge-template').html();
+        var theTemplate = Handlebars.compile(theTemplateScript);
+        console.log(response);
+        var context = {
+            teacher: response.teacher,
+            badges: response.badges
+        };
+        var theCompiledHtml = theTemplate(context)
+        $('#teacher-show').html(theCompiledHtml);
+    })
   })
 }

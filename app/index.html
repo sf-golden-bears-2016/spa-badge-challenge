@@ -19,12 +19,27 @@
             <h1> SF Teachers </h1>
             <ul id='teachers-list'>
                 <script id="teacher-template" type="text/x-handlebars-template">
-                    {{#each peeps}}
-                    <li><a href="http://localhost:3000/teachers/{{id}}">{{name}}</a></li>
+                    {{#each teachers}}
+                    <li><a href="http://localhost:3000/teachers/{{id}}">{{name}}
+                    <form action="http://localhost:3000/teachers/{{id}}">
+                    </form>
+                    </a></li>
                     {{/each}}
                 </script>
             </ul>
             <div class="place-holder"></div>
+        </div>
+        <div id="teacher-show" style="display: none;">
+            <script id="badge-template" type="text/x-handlebars-template">
+                <h1>{{teacher.name}}</h1>
+                {{#each badges}}
+                <li>
+                  {{content}}
+                  <a href="http://localhost:3000/teachers/{{teacher.id}}/badges/{{badge.id}}/votes"><img src="/img/downvote.gif" alt="downvote"></a>
+                  <a href="http://localhost:3000/teachers/{{teacher.id}}/badges/{{badge.id}}/votes"><img src="/img/upvote.gif" alt="upvote"></a>
+                </li>
+                {{/each}}
+            </script>
         </div>
     </div>
 </body>
