@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'ffaker'
+
+10.times do
+  Teacher.create(name: FFaker::Name.name)
+end
+
+100.times do
+  Badge.create(content: FFaker::CheesyLingo.sentence, teacher_id: rand(1..10))
+end
