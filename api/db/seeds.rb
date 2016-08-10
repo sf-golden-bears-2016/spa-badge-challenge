@@ -1,7 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'ffaker'
+
+20.times do
+  Teacher.create(name: FFaker::Name.name)
+end
+
+100.times do
+  ids = Teacher.pluck(:id)
+  Badge.create(text: FFaker::Food.fruit, teacher_id: ids.sample, votes: rand(15))
+end
