@@ -1,8 +1,8 @@
 class TeachersController < ApplicationController
   def index
       @teachers = Teacher.all
-      headers['Access-Control-Allow-Origin'] = '*'
-      render json: @teachers
+      headers['Access-Control-Allow-Origin'] = 'http://localhost:9000'
+      render :json => @teachers
   end
 
   def show
