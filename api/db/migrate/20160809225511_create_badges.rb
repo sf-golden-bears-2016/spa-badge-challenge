@@ -3,7 +3,7 @@ class CreateBadges < ActiveRecord::Migration
     create_table :badges do |t|
       t.text :text
       t.integer :votes
-      t.integer :student_id
+      t.integer :teacher_id
 
       t.timestamps null: false
     end
