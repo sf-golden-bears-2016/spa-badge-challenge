@@ -1,33 +1,35 @@
-// $(function () {
-//   // // Grab the template script
-//   // var theTemplateScript = $("#address-template").html();
-
-//   // // Compile the template
-//   // var theTemplate = Handlebars.compile(theTemplateScript);
-
-//   // // Define our data object
-//   // var context={
-//   //   "city": "London",
-//   //   "street": "Baker Street",
-//   //   "number": "221B"
-//   // };
-
-//   // // Pass our data to the template
-//   // var theCompiledHtml = theTemplate(context);
-
-//   // // Add the compiled html to the page
-//   // $('.content-placeholder').html(theCompiledHtml);
-// });
 $(function(){
-  $('#walker').on("click", function(event) {
-    event.preventDefault();
-  // console.log("harr0")
+  showTeacherList();
+  showTeacherDetail();
+})
+
+var showTeacherList = function() {
   $.ajax({
     url: 'http://localhost:3000',
-    type: 'get'
+    type: 'get',
+    dataType: 'JSON'
   })
   .done(function(response){
-    console.log(response)
+    $.each(response, function(index, teacher){
+      $("#teacher-list").append("<div><li id="+teacher.id+"><a href=/teachers/"+teacher.id+">" + teacher.name + "</a></li></div><div id="+teacher.id+"></div")
     })
   })
-})
+}
+
+var showTeacherDetail = function(){
+  $('#teacher-list').on('click','li a',function(event){
+    event.preventDefault();
+    var that = $(this);
+    var link = $(this).attr('href');
+    var $divID = "#"+"teachers"+link.split("/")[2];
+    $.ajax({
+      url: 'http://localhost:3000/'+link,
+      type: 'get',
+      dataType: 'JSON'
+    })
+    .done(function(response){
+      console.log()
+      $(that).append(response)
+    })
+  })
+}
