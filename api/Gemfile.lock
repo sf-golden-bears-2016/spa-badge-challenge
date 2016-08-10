@@ -120,6 +120,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   faker
+  json
   pg
   pry-rails
   rack-cors

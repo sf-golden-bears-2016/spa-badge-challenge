@@ -1,13 +1,13 @@
 class TeachersController < ApplicationController
   def index
     @teachers = Teacher.all
-    content_type :json
-    {teachers: @teachers}.to_json
+    headers['Access-Control-Allow-Origin'] = 'http://localhost:9000'
+    render json: @teachers
   end
 
   def show
     @teacher = Teacher.find(params[:id])
-    content_type :json
-    {teacher: @teacher}.to_json
+    headers['Access-Control-Allow-Origin'] = 'http://localhost:9000'
+    render json: @teacher
   end
 end
