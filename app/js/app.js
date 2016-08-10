@@ -1,6 +1,7 @@
 $(document).ready(function() {
     bringHomePage();
     showTeacherPage();
+    createVote();
 });
 //
 baseURL = "http://localhost:3000"
@@ -23,7 +24,6 @@ function bringHomePage() {
 }
 
 function showTeacherPage(){
-  console.log("ding")
   $('#teachers-list').on("click", "a", function(event){
     event.preventDefault();
     data = $(this).children().first().attr("action")
@@ -37,7 +37,6 @@ function showTeacherPage(){
       $('#teacher-show').show();
         var theTemplateScript = $('#badge-template').html();
         var theTemplate = Handlebars.compile(theTemplateScript);
-        console.log(response);
         var context = {
             teacher: response.teacher,
             badges: response.badges
@@ -45,5 +44,17 @@ function showTeacherPage(){
         var theCompiledHtml = theTemplate(context)
         $('#teacher-show').html(theCompiledHtml);
     })
+  })
+}
+
+function createVote(){
+  $('#teacher-show').on("click", "input", function(event){
+    event.preventDefault();
+  })
+  data = event.currentTarget.value
+  $.ajax({
+    url: data,
+    method: "POST",
+    
   })
 }

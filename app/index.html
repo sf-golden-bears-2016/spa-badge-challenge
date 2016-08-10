@@ -29,14 +29,20 @@
             </ul>
             <div class="place-holder"></div>
         </div>
+        
         <div id="teacher-show" style="display: none;">
             <script id="badge-template" type="text/x-handlebars-template">
                 <h1>{{teacher.name}}</h1>
                 {{#each badges}}
                 <li>
                   {{content}}
-                  <a href="http://localhost:3000/teachers/{{teacher.id}}/badges/{{badge.id}}/votes"><img src="/img/downvote.gif" alt="downvote"></a>
-                  <a href="http://localhost:3000/teachers/{{teacher.id}}/badges/{{badge.id}}/votes"><img src="/img/upvote.gif" alt="upvote"></a>
+                  <form style="display: inline;" action="http://localhost:3000/teachers/{{teacher_id}}/badges/{{id}}/votes" method="POST">
+                    <input type="image" src="/img/downvote.gif" value="false" alt="Submit">
+                  </form>
+
+                  <form style="display: inline;" action="http://localhost:3000/teachers/{{teacher_id}}/badges/{{id}}/votes" method="POST">
+                    <input type="image" src="/img/upvote.gif" value="true" alt="Submit">
+                  </form>
                 </li>
                 {{/each}}
             </script>
