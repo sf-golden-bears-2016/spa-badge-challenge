@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   # root 'index'
   resources :teachers, only: [:index, :show]
   resources :badges, only: [:create, :update]
+  get '/teachers/:id/badges' => 'badges#index'
 end
